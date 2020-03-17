@@ -7,7 +7,7 @@ class Input extends Component {
     super(props);
     this.state = {
       value: "",
-      html: ""
+      html: "original"
     };
   }
 
@@ -16,11 +16,14 @@ class Input extends Component {
   };
 
   handleSubmit = event => {
-    alert("A number was submitted: " + this.state.value);
     event.preventDefault();
     let url = "http://localhost:3000/scrape";
+    let url2 = "http://localhost:3000/scrape/" + this.state.value;
+    axios.post(url, {
+      body: { value: this.state.value }
+    });
     axios
-      .get(url)
+      .get(url2)
       .then(response => {
         this.setState({
           ...this.state,
@@ -30,11 +33,8 @@ class Input extends Component {
       .then(data => {
         return data;
       })
-      //Do your action when success/get response from server
-
       .catch(function(error) {
         console.log(error);
-        //Error handling is here
       });
   };
 
@@ -46,6 +46,7 @@ class Input extends Component {
             Number:
             <input
               type="number"
+              max={5}
               value={this.state.value}
               onChange={this.handleChange}
             />
@@ -56,7 +57,9 @@ class Input extends Component {
             innerText="Click me"
           />
         </form>
-        <textarea value={this.state.html}></textarea>
+        <div>
+          <p>{this.state.html}</p>
+        </div>
       </div>
     );
   }
