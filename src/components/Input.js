@@ -65,7 +65,7 @@ class Input extends Component {
         </form>
         <div>
           {Object.values(this.state.html).map((element, index) => {
-            return <ul key={index}>{element.headers}</ul>;
+            return <ul key={index}>{element.headers.map((header) => <li>{header}</li>)}</ul>;
           })}
         </div>
       </div>
