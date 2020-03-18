@@ -3,13 +3,12 @@ import Button from "./Button";
 import "./Input.css";
 const axios = require("axios").default;
 
-
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
       value: "",
-      html: [] 
+      html: []
     };
   }
 
@@ -26,13 +25,14 @@ class Input extends Component {
     });
     axios
       .get(url2)
-      //.then(res => console.log(res))
-      .then(response => { return response.data })
-      
+      .then(response => {
+        return response.data;
+      })
+
       .then(response => {
         this.setState({
           value: "",
-          html:  response.message 
+          html: response.message
         });
       })
       .then(data => {
@@ -63,8 +63,8 @@ class Input extends Component {
           />
         </form>
         <div>
-          {Object.values((this.state.html)).map((element, index) => {
-            return <ul key={ index }>{element.headers}</ul>
+          {Object.values(this.state.html).map((element, index) => {
+            return <ul key={index}>{element.headers}</ul>;
           })}
         </div>
       </div>
