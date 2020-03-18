@@ -51,6 +51,7 @@ class Input extends Component {
             Number:
             <input
               type="number"
+              min={1}
               max={5}
               value={this.state.value}
               onChange={this.handleChange}
